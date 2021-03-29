@@ -7,16 +7,9 @@ public class PlayerMovement : MonoBehaviour
   public CharacterController controller;
 
   public Transform groundCheck;
-
-  public float groundDistance = 0.4f;
   public LayerMask groundMask;
 
-
-  public float jumpHeight = 3f;
-
-
-  public float speed = 20;
-  public float g = -9.81f;
+  public float jumpHeight, speed, g, groundDistance;
 
   Vector3 velocity;
   bool isGrounded;

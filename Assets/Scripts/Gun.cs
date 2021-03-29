@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-
-  public float damage = 20f;
-  public float range = 100f;
-  public float impactForce = 100f;
-  public float fireRate = 20f;
-
+  public float damage, impactForce, fireRate;
   public Camera aimCam;
 
   public ParticleSystem flash;
@@ -25,18 +20,19 @@ public class Gun : MonoBehaviour
       fireTime = Time.time + 1f / fireRate;
       Shoot();
     }
+
   }
   void Shoot()
   {
     // !Skottet
     RaycastHit hit;
-    if (Physics.Raycast(aimCam.transform.position, aimCam.transform.forward, out hit, range))
+    if (Physics.Raycast(aimCam.transform.position, aimCam.transform.forward, out hit))
     {
 
       // ?Fansy mansy Flashy helpy 
       flash.Play();
 
-      EnemyAI target = hit.transform.GetComponent<EnemyAI>();
+      Target target = hit.transform.GetComponent<Target>();
 
       // !Skadar Target
       if (target != null)
@@ -53,8 +49,6 @@ public class Gun : MonoBehaviour
       // !Effekt
       GameObject effektGO = Instantiate(effect, hit.point, Quaternion.LookRotation(hit.normal));
       Destroy(effektGO, 1f);
-
     }
   }
-
 }

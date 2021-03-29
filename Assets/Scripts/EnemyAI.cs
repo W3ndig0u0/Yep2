@@ -12,8 +12,6 @@ public class EnemyAI : MonoBehaviour
 
   public LayerMask whatIsGround, whatIsPlayer;
 
-  public float health = 500f;
-
   // !Patrolling
   public Vector3 walkPoint;
   bool walkpointSet;
@@ -120,22 +118,6 @@ public class EnemyAI : MonoBehaviour
   {
     // !Jagar spelaren
     agent.SetDestination(player.position);
-  }
-
-  public void TakeDamage(float damageAmount)
-  {
-    // !Skada
-    health -= damageAmount;
-    if (health <= 0f)
-    {
-      Die();
-    }
-  }
-
-  void Die()
-  {
-    // !Dör
-    Destroy(gameObject);
   }
 
 }
