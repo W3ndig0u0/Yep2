@@ -1,15 +1,15 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
-  public float damage, impactForce, fireRate;
+  public float damage;
+  public float impactForce, fireRate;
   public Camera aimCam;
-
   public ParticleSystem flash;
-
   public GameObject effect;
+  public GameObject effect2;
 
   float fireTime = 0f;
   void Update()
@@ -29,15 +29,21 @@ public class Gun : MonoBehaviour
     if (Physics.Raycast(aimCam.transform.position, aimCam.transform.forward, out hit))
     {
 
-      // ?Fansy mansy Flashy helpy 
-      flash.Play();
-
       Target target = hit.transform.GetComponent<Target>();
 
       // !Skadar Target
       if (target != null)
       {
         target.TakeDamage(damage);
+        FindObjectOfType<AudioManager>().Play("HitSound");
+        GameObject effektGO2 = Instantiate(effect2, hit.point, Quaternion.identity);
+        Destroy(effektGO2, 1f);
+        Score.scoreValue += 20;
+      }
+      else
+      {
+        GameObject effektGO = Instantiate(effect, hit.point, Quaternion.LookRotation(hit.normal));
+        Destroy(effektGO, 1f);
       }
 
       // !Force
@@ -45,10 +51,11 @@ public class Gun : MonoBehaviour
       {
         hit.rigidbody.AddForce(-hit.normal * impactForce);
       }
+    }
 
-      // !Effekt
-      GameObject effektGO = Instantiate(effect, hit.point, Quaternion.LookRotation(hit.normal));
-      Destroy(effektGO, 1f);
+    else
+    {
+      flash.Play();
     }
   }
 }

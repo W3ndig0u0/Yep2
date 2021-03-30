@@ -4,38 +4,66 @@ using UnityEngine;
 
 public class Spawn : MonoBehaviour
 {
-  public GameObject spawnObj;
+  public GameObject spawnObj, spawnObj2, spawnObj3;
 
-  public int maxEnemy, amountEnemy;
-  public float minX, maxX, minZ, maxZ, minSpawnTime, maxSpawnTime;
+  public float minX, maxX, minZ, maxZ, minSpawnTime, maxSpawnTime, minSpawnTime2, maxSpawnTime2, minSpawnTime3, maxSpawnTime3, maxEnemy, enemyAmount;
   private bool isSpawning;
-
-  private float timer;
+  private float timer, timer2, timer3, timeSinceStart, difficultyMultiplier;
 
   // !Is spawn ska vara False från 1-frame
   void Awake()
   {
     isSpawning = false;
+    timeSinceStart = 0;
   }
   void Update()
   {
+
+    timeSinceStart = Time.deltaTime / 5;
     // !Ger en liten random delay efter varje Spawn
-    if (!isSpawning)
+    if (!isSpawning && maxEnemy >= enemyAmount)
     {
       timer = Random.Range(minSpawnTime, maxSpawnTime);
-      Invoke("SpawnObject", timer);
+      Invoke("SpawnObject1", timer);
+
+      timer2 = Random.Range(minSpawnTime2, maxSpawnTime2);
+      Invoke("SpawnObject2", timer2);
+
+      timer3 = Random.Range(minSpawnTime3, maxSpawnTime3);
+      Invoke("SpawnObject3", timer3);
+
       isSpawning = true;
     }
   }
-  void SpawnObject()
+  void SpawnObject1()
   {
     // !Spawnar fienden i Random plats
     float x = Random.Range(minX, maxX);
     float z = Random.Range(minZ, maxZ);
 
     Instantiate(spawnObj, new Vector3(x, 5, z), Quaternion.identity);
-    amountEnemy += 1;
     isSpawning = false;
+    enemyAmount += 1;
 
+  }
+  void SpawnObject2()
+  {
+    // !Spawnar fienden i Random plats
+    float x2 = Random.Range(minX, maxX);
+    float z2 = Random.Range(minZ, maxZ);
+
+    Instantiate(spawnObj2, new Vector3(x2, 7, z2), Quaternion.identity);
+    isSpawning = false;
+    enemyAmount += 1;
+  }
+  void SpawnObject3()
+  {
+    // !Spawnar fienden i Random plats
+    float x3 = Random.Range(minX, maxX);
+    float z3 = Random.Range(minZ, maxZ);
+
+    Instantiate(spawnObj3, new Vector3(x3, 4, z3), Quaternion.identity);
+    isSpawning = false;
+    enemyAmount += 1;
   }
 }

@@ -15,6 +15,7 @@ public class Aim : MonoBehaviour
   {
     // !Musen syns ej
     Cursor.lockState = CursorLockMode.Locked;
+    Cursor.visible = false;
   }
   void Update()
   {

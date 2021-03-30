@@ -5,13 +5,26 @@ using UnityEngine.UI;
 
 public class Target : MonoBehaviour
 {
+  public HealthBar healthbar;
+  public float health;
+  public float getScoreFromKill;
+  public float maxHealth = 100;
+  public Score score;
 
-  public float health, getScoreFromKill, score;
-
+  void Start()
+  {
+    // !Sätter max liv o Health bar
+    health = maxHealth;
+    healthbar.SetMaxHealth(maxHealth);
+  }
   public void TakeDamage(float damageAmount)
   {
     // !Skada
     health -= damageAmount;
+
+    // !Minskar healthbar
+    healthbar.SetHealth(health);
+
     if (health <= 0f)
     {
       Die();
@@ -21,8 +34,7 @@ public class Target : MonoBehaviour
   {
     // !Dör
     Destroy(gameObject);
-    score += getScoreFromKill;
-
+    Score.scoreValue += getScoreFromKill;
   }
 
 }

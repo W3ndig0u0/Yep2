@@ -5,24 +5,11 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-
   public NavMeshAgent agent;
-
   public Transform player;
-
   public LayerMask whatIsGround, whatIsPlayer;
-
-  // !Patrolling
-  public Vector3 walkPoint;
-  bool walkpointSet;
-  public float walkPointRange;
-
-  // !States
-  public float sightRange, attackRange;
-  public bool playerInSightRange, playerInAttackRange;
-
-  //  !Attacking
-  public float timeBetweenAttack;
+  public float attackRange, timeBetweenAttack, damage;
+  public bool playerInAttackRange;
   bool alreadyAttacked;
 
   void Awake()
@@ -34,81 +21,35 @@ public class EnemyAI : MonoBehaviour
   void Update()
   {
     //   !Kolla efter syn och attackRange
-    playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
     playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
     // !AI Status
-    if (playerInSightRange && playerInAttackRange)
+    if (playerInAttackRange)
     {
       AttackPlayer();
     }
-
-    else if (playerInSightRange && !playerInAttackRange)
+    else
     {
       ChasePlayer();
     }
-    else
-    {
-      Patroling();
-    }
   }
 
-  void SearchWalkPoint()
-  {
-    //! Random värden
-    float randomZ = Random.Range(-walkPointRange, walkPointRange);
-    float randomX = Random.Range(-walkPointRange, walkPointRange);
-
-    walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
-
-    // !kollar om det är i marken
-    if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
-    {
-      walkpointSet = true;
-    }
-  }
-  void Patroling()
-  {
-    if (!walkpointSet)
-    {
-      SearchWalkPoint();
-    }
-
-    if (walkpointSet)
-    {
-      agent.SetDestination(walkPoint);
-    }
-
-    Vector3 distanceToWalkPoint = transform.position - walkPoint;
-
-    // !När Målet är nått
-    if (distanceToWalkPoint.magnitude < 1f)
-    {
-      walkpointSet = false;
-    }
-  }
+  RaycastHit hit;
   void AttackPlayer()
   {
-
-    // !Enemy rör ej
-    agent.SetDestination(transform.position);
-
-    // !Stalka player
-    transform.LookAt(player);
+    Target target = hit.transform.GetComponent<Target>();
 
     if (!alreadyAttacked)
     {
-
-      // !Attack Koden:
-
-      //! 
+      if (Input.GetKey(KeyCode.G))
+      {
+        target.TakeDamage(damage);
+      }
 
       alreadyAttacked = true;
       Invoke(nameof(ResetAttacked), timeBetweenAttack);
     }
-
   }
-
   void ResetAttacked()
   {
     alreadyAttacked = false;
