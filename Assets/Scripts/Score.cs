@@ -15,9 +15,7 @@ public class Score : MonoBehaviour
     scoreValue = 0;
     scoreText = GetComponent<Text>();
   }
-
-  // Update is called once per frame
-  void Update()
+  void FixedUpdate()
   {
     scoreText.text = "Score: " + scoreValue;
   }

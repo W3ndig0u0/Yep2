@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
   public Transform groundCheck;
   public LayerMask groundMask;
 
+  public GameObject hitEffect;
+
   public float jumpHeight, speed, g, groundDistance;
 
   Vector3 velocity;
@@ -38,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
     if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
     {
       velocity.y = Mathf.Sqrt(jumpHeight * -2f * g * 4);
+      GameObject hitEffectGO = Instantiate(hitEffect, transform.position, Quaternion.identity);
     }
 
     // !Running

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 977467755094372596}
   - component: {fileID: 977467755094372597}
   - component: {fileID: 977467755094372594}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 977467755275590015}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,9 +140,9 @@ GameObject:
   - component: {fileID: 977467755286973457}
   - component: {fileID: 977467755286973471}
   - component: {fileID: 977467755286973456}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: PlayerContainer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -216,7 +216,7 @@ GameObject:
   - component: {fileID: 977467755436755262}
   - component: {fileID: 977467755436755263}
   - component: {fileID: 977467755436755260}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -316,6 +316,7 @@ MonoBehaviour:
   aimCam: {fileID: 977467755094372596}
   flash: {fileID: 977467755908903762}
   effect: {fileID: 4355998641414104034, guid: f21465540c661ed4cab2e628ded13f7f, type: 3}
+  effect2: {fileID: 0}
 --- !u!1 &977467755908903765
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,7 +328,7 @@ GameObject:
   - component: {fileID: 977467755908903764}
   - component: {fileID: 977467755908903762}
   - component: {fileID: 977467755908903763}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: Flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5081,7 +5082,7 @@ GameObject:
   - component: {fileID: 977467756829573850}
   - component: {fileID: 977467756829573851}
   - component: {fileID: 977467756829573852}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}

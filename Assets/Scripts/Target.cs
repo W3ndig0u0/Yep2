@@ -9,7 +9,6 @@ public class Target : MonoBehaviour
   public float health;
   public float getScoreFromKill;
   public float maxHealth = 100;
-  public Score score;
 
   void Start()
   {
